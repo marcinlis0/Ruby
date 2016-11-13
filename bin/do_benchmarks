@@ -1,11 +1,13 @@
 #! /usr/bin/env ruby
 
 require 'benchmark'
+require_relative '../lib/huffman.rb'
 
-array5 = (1..500_000).map { rand }
-array10 = (1..1_000_000).map { rand }
+h = Huffman.new
+array = (1..10_001).map { rand }
 
 Benchmark.bm(4) do |x|
-  x.report('sort!   500_000') { array5.dup.sort! }
-  x.report('sort! 1_000_000') { array10.dup.sort! }
+  x.report('encrypt    1000') { for i in 1..100; h.encrypt(array[i].to_s); end }
+  x.report('encrypt   1_000') { for i in 1..1_000; h.encrypt(array[i].to_s); end }
+  x.report('encrypt  10_000') { for i in 1..10_000; h.encrypt(array[i].to_s); end }
 end

@@ -1,4 +1,4 @@
-# kik
+#
 class Node
   def initialize(args)
     if args.size.zero?
@@ -81,12 +81,12 @@ class Huffman
       nodes.push(root)
     end
     st = ''
-    if !root.instance_variable_get(:@left).nil?
+    unless root.instance_variable_get(:@left).nil?
       st = root.instance_variable_get(:@code).to_s + '0'
       root.instance_variable_get(:@left).code_set(st)
       make_code(root.instance_variable_get(:@left), nodes)
     end
-    if !root.instance_variable_get(:@right).nil?
+    unless root.instance_variable_get(:@right).nil?
       st = root.instance_variable_get(:@code)
       st += '1'
       root.instance_variable_get(:@right).code_set(st)
@@ -137,18 +137,14 @@ class Huffman
         if tmp_node.instance_variable_get(:@left).nil?
           text += tmp_node.instance_variable_get(:@value)
           tmp_node = @root
-          tmp_node = tmp_node.instance_variable_get(:@left)
-        else
-          tmp_node = tmp_node.instance_variable_get(:@left)
         end
+        tmp_node = tmp_node.instance_variable_get(:@left)
       else
         if tmp_node.instance_variable_get(:@right).nil?
           text += tmp_node.instance_variable_get(:@value)
           tmp_node = @root
-          tmp_node = tmp_node.instance_variable_get(:@right)
-        else
-          tmp_node = tmp_node.instance_variable_get(:@right)
         end
+        tmp_node = tmp_node.instance_variable_get(:@right)
       end
     end
     text += tmp_node.instance_variable_get(:@value)
